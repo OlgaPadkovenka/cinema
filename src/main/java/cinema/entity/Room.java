@@ -1,11 +1,9 @@
-package entity;
+package cinema.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name="room")
 public class Room {
 
     @Id
@@ -15,7 +13,9 @@ public class Room {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name="filial_id", nullable = false)
     private Filial filial;
+
     private Integer row;
     private Integer place;
 
@@ -51,8 +51,8 @@ public class Room {
         this.place = place;
     }
 
-    public Filial getFilial() {
-        return filial;
+    public Integer getFilial() {
+        return filial.getId();
     }
 
     public void setFilial(Filial filial) {

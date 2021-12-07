@@ -1,9 +1,8 @@
-package entity;
+package cinema.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -12,10 +11,15 @@ public class Seance {
     @GeneratedValue
     private Integer id;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name="cinema_id", nullable = false)
+    private Cinema cinema;
 
     @ManyToOne
+    @JoinColumn(name="room_id", nullable = false)
     private Room room;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd.MM.yyyy")
     private Date date;
     private Integer price;
 
@@ -27,12 +31,12 @@ public class Seance {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Cinema getCinema() {
+        return cinema;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
 
     public Room getRoom() {

@@ -1,10 +1,10 @@
-package entity;
+package cinema.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name="filial")
 public class Filial {
     @Id
     @GeneratedValue
@@ -12,13 +12,8 @@ public class Filial {
     private String name;
     private String address;
 
-    public Filial() {}
-
-    public Filial(Integer id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-    }
+    @OneToMany(mappedBy ="filial")
+    private Set<Room> rooms;
 
     public Integer getId() {
         return id;
@@ -42,5 +37,13 @@ public class Filial {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 }
